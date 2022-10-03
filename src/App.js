@@ -36,13 +36,22 @@ function App() {
   useEffect(() => {
     if (choiseOne && choiseTwo) {
       if (choiseOne.src === choiseTwo.src) {
-        console.log("same");
+        setCardsToDisplay((prev) => {
+          return prev.map((elem) => {
+            if (elem.src === choiseOne.src) {
+              return { ...elem, match: true };
+            } else {
+              return elem;
+            }
+          });
+        });
       } else {
         console.log("not the same");
       }
       resetChoises();
     }
   }, [choiseOne, choiseTwo]);
+  console.log(cardsToDisplay);
   function resetChoises() {
     setChoiseOne(null);
     setChoiseTwo(null);
